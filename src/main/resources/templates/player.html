@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+<body>
+  <h1>Listing person from data object</h1>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Dob</th>
+        </tr>
+        <tr th:each="player : ${data}">
+            <td th:text = "${player.getFirstName()}"></td>
+            <td th:text = "${player.getLastName()}"></td>
+            <td th:text = "${player.getDob()}"></td>
+<!--            <td><a th:href = "@{/delete/{firstName}(firstName = ${player.getFirstName()})}"> Delete Person </a></td>-->
+        </tr>
+    </table>
+<!--  </br></br></br>-->
+
+<!--    <form action ="#" th:action="@{/player/ad}" th:object="${person}" method="post">-->
+<!--        <label for="firstName"> First Name : </label> <br>-->
+<!--        <input type="text" id="firstName" th:field="*{firstName}"> <br>-->
+
+<!--        <label for="lastName"> Last Name : </label> <br>-->
+<!--        <input type="text" id="lastName" th:field="*{lastName}"> <br>-->
+
+<!--        <label for="age"> Age : </label> <br>-->
+<!--        <input type="text" id="age" th:field="*{age}"> <br>-->
+
+<!--        <input type="submit" value="Add Person">-->
+<!--    </form>-->
+
+</body>
+</html>

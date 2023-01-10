@@ -39,7 +39,7 @@ public class SponsorService {
         SponsorDTO sponsor = getSponsorDTOById(sponsorId);
 
         if(!sponsor.getTournamentNames().isEmpty())
-            throw new CannotDeleteEntityException("Cannot delete sponsor with id " + sponsor.getSponsorId() + " because sponsor is assigned to one or more tournaments");
+            throw new CannotDeleteEntityException("Cannot delete sponsor with id " + sponsor.getSponsorId() + " because sponsor is assigned to one or more tournaments : " + sponsor.getTournamentNames());
         else{
 
             sponsorRepository.deleteById(sponsorId);

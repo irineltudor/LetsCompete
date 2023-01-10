@@ -71,7 +71,7 @@ public class PlayerService {
         PlayerDTO player = getPlayerDTOById(playerId);
 
         if (!Objects.equals(player.getTeam(), ""))
-            throw new CannotDeleteEntityException("Cannot delete player with id " + player.getPlayerId() + " because player is part of a team");
+            throw new CannotDeleteEntityException("Cannot delete player with id " + player.getPlayerId() + " because player is part of a team, first delete player's team");
         else {
                 playerRepository.deleteById(playerId);
         }
@@ -88,7 +88,7 @@ public class PlayerService {
      */
 
     @Transactional
-    // this will roll back everything after exception because we don't need addition if the exception is happening
+    // this will roll back everything after exception because we don't need addition if the exception is thrown
     public String bulkLoadPlayer(int n) {
         for (int i = 10; i < n; i++) {
             if (playerRepository.existsByFirstName("firstname" + i)) {

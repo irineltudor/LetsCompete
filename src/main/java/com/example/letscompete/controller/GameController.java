@@ -27,8 +27,8 @@ public class GameController {
         return ResponseEntity.ok(gameService.getGameDTOs());
     }
 
-    @GetMapping("/{gameId}")
-    public ResponseEntity<GameDTO> retrieveGameById(@PathVariable int gameId){return ResponseEntity.ok(gameService.getGameDTOById(gameId));}
+    @GetMapping("/{title}")
+    public ResponseEntity<GameDTO> retrieveGameByTitle(@PathVariable String title){return ResponseEntity.ok(gameService.getGameDTObyTitle(title));}
 
 
     @PostMapping
@@ -42,9 +42,9 @@ public class GameController {
 
 
     @DeleteMapping
-    public ResponseEntity<?> removeGameWithTitle(@RequestParam String title)
+    public ResponseEntity<?> removeGameById(@RequestParam int gameId)
     {
-        GameDTO deletedGame = gameService.deleteGameWithTitle(title);
+        GameDTO deletedGame = gameService.deleteGameWithId(gameId);
 
         return ResponseEntity.ok(deletedGame);
     }

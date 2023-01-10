@@ -42,7 +42,7 @@ public class LocationController {
     public ResponseEntity<?> replaceLocationAddress(@PathVariable int locationId, @RequestParam String address){return ResponseEntity.ok(locationService.changeLocationAddress(locationId,address));}
 
     @DeleteMapping
-    public ResponseEntity<?> removeLocationWithId(@RequestParam int locationId)
+    public ResponseEntity<?> removeLocationById(@RequestParam int locationId)
     {
         LocationDTO deletedLocation = locationService.deleteLocationWithId(locationId);
 

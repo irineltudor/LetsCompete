@@ -108,7 +108,7 @@ public class TournamentService {
         return teamDTO;
     }
 
-    public LocationDTO deleteLocationById(int tournamentId) {
+    public LocationDTO deleteLocation(int tournamentId) {
         LocationDTO locationDTO = new LocationDTO();
         Tournament tournament = getTournamentById(tournamentId);
 
@@ -131,7 +131,7 @@ public class TournamentService {
         return locationDTO;
     }
 
-    public GameDTO deleteGameById(int tournamentId) {
+    public GameDTO deleteGame(int tournamentId) {
         GameDTO gameDTO;
         Tournament tournament = getTournamentById(tournamentId);
 
@@ -204,9 +204,10 @@ public class TournamentService {
         Location newLocation = locationService.getLocationById(locationId);
         Location oldLocation = tournament.getLocation();
 
-
-        oldLocation.setTournamentList(oldLocation.getTournamentList().stream().filter(tournament1 -> tournament1.getTournamentId() != tournamentId).collect(Collectors.toList()));
-        locationService.update(oldLocation);
+        if(oldLocation != null) {
+            oldLocation.setTournamentList(oldLocation.getTournamentList().stream().filter(tournament1 -> tournament1.getTournamentId() != tournamentId).collect(Collectors.toList()));
+            locationService.update(oldLocation);
+        }
 
         tournament.setLocation(newLocation);
         tournamentRepository.save(tournament);
@@ -244,8 +245,10 @@ public class TournamentService {
         newGame.setTournamentList(tournamentList);
         gameDTO = gameService.update(newGame);
 
-        oldGame.setTournamentList(newGame.getTournamentList().stream().filter(tournament1 -> tournament1.getTournamentId() != tournamentId).collect(Collectors.toList()));
-        gameService.update(newGame);
+        if(oldGame != null) {
+            oldGame.setTournamentList(newGame.getTournamentList().stream().filter(tournament1 -> tournament1.getTournamentId() != tournamentId).collect(Collectors.toList()));
+            gameService.update(newGame);
+        }
 
 
         return gameDTO;

@@ -38,7 +38,7 @@ public class SponsorController {
     }
 
     @DeleteMapping
-    public ResponseEntity<?> removeSponsorWithId(@RequestParam int sponsorId)
+    public ResponseEntity<?> removeSponsorById(@RequestParam int sponsorId)
     {
         SponsorDTO deletedSponsor = sponsorService.deleteSponsorWithId(sponsorId);
 

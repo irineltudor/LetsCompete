@@ -41,17 +41,18 @@ public class PlayerController {
         return ResponseEntity.created(URI.create("/" + savedPlayer.getPlayerId())).body(savedPlayer);
     }
 
+    @GetMapping("/{playerId}/team")
+    public ResponseEntity<?> getPlayerTeam(@PathVariable int playerId){return ResponseEntity.ok(playerService.getPlayerTeam(playerId));}
+
     @PutMapping("/{playerId}/team")
     public ResponseEntity<?> replacePlayerTeam(@PathVariable int playerId,@RequestParam int teamId){return ResponseEntity.ok(playerService.changePlayerTeam(playerId,teamId));}
 
     @DeleteMapping("/{playerId}/team")
     public ResponseEntity<?> removeTeamFromPlayer(@PathVariable int playerId){return ResponseEntity.ok(playerService.deletePlayerTeam(playerId));}
 
-    @GetMapping("/{playerId}/team")
-    public ResponseEntity<?> getPlayerTeam(@PathVariable int playerId){return ResponseEntity.ok(playerService.getPlayerTeam(playerId));}
 
     @DeleteMapping
-    public ResponseEntity<PlayerDTO> removePlayerWithId(@RequestParam int playerId) {
+    public ResponseEntity<PlayerDTO> removePlayerById(@RequestParam int playerId) {
 
         PlayerDTO player = playerService.deletePlayerWithId(playerId);
 

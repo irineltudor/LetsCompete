@@ -32,12 +32,16 @@ public class GameService {
         return new GameDTO(gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game with id " + gameId + " not found")));
     }
 
+    public GameDTO getGameDTObyTitle(String title){
+        return new GameDTO(gameRepository.findGameByTitle(title).orElseThrow(() -> new EntityNotFoundException("Game with id " + title + " not found")));
+    }
+
     protected Game getGameById(int gameId) {
         return gameRepository.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game with id " + gameId + " not found"));
     }
 
     public Game getGameByTitle(String title) {
-        return gameRepository.findGameByTitle(title);
+        return gameRepository.findGameByTitle(title).orElseThrow(() -> new EntityNotFoundException("Game with id " + title + " not found"));
     }
 
     public GameDTO add(Game game) {
@@ -47,9 +51,11 @@ public class GameService {
     public GameDTO deleteGameWithId(int gameId) {
 
         GameDTO deletedGame = getGameDTOById(gameId);
-
-        gameRepository.deleteById(gameId);
-
+        if (!deletedGame.getTournamentList().isEmpty())
+            throw new CannotDeleteEntityException("Cannot delete " + deletedGame.getTitle() + " because there are tournaments where this game is played : "  + deletedGame.getTournamentList());
+        else {
+            gameRepository.deleteById(gameId);
+        }
 
         return deletedGame;
     }
@@ -59,7 +65,7 @@ public class GameService {
         Game deletedGame = getGameByTitle(title);
 
         if (!deletedGame.getTournamentList().isEmpty())
-            throw new CannotDeleteEntityException("Cannot delete " + deletedGame.getTitle() + " because there are tournaments with this game");
+            throw new CannotDeleteEntityException("Cannot delete " + deletedGame.getTitle() + " because there are tournaments where this game is played");
         else {
 
             gameRepository.deleteById(deletedGame.getGameId());

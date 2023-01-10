@@ -5,7 +5,6 @@ import com.example.letscompete.dto.*;
 import com.example.letscompete.model.Tournament;
 import com.example.letscompete.service.TournamentService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -48,7 +47,7 @@ public class TournamentController {
     public ResponseEntity<TeamDTO> addTournamentTeam(@PathVariable int tournamentId,@RequestParam int teamId){return ResponseEntity.ok(tournamentService.addTeam(tournamentId,teamId));}
 
     @DeleteMapping("/{tournamentId}/teams")
-    public ResponseEntity<TeamDTO> removeTournamenTeam(@PathVariable int tournamentId,@RequestParam int teamId){return ResponseEntity.ok(tournamentService.deleteTeamById(tournamentId,teamId));}
+    public ResponseEntity<TeamDTO> removeTournamentTeam(@PathVariable int tournamentId,@RequestParam int teamId){return ResponseEntity.ok(tournamentService.deleteTeamById(tournamentId,teamId));}
 
 
     @GetMapping("/{tournamentId}/location")
@@ -58,7 +57,7 @@ public class TournamentController {
     public ResponseEntity<LocationDTO> replaceTournamentLocation(@PathVariable int tournamentId,@RequestParam int locationId){return ResponseEntity.ok(tournamentService.changeTournamentLocation(tournamentId,locationId));}
 
     @DeleteMapping("/{tournamentId}/location")
-    public ResponseEntity<?> removeTournamentLocation(@PathVariable int tournamentId){return ResponseEntity.ok(tournamentService.deleteLocationById(tournamentId));}
+    public ResponseEntity<?> removeTournamentLocation(@PathVariable int tournamentId){return ResponseEntity.ok(tournamentService.deleteLocation(tournamentId));}
 
 
     @GetMapping("/{tournamentId}/game")
@@ -68,7 +67,7 @@ public class TournamentController {
     public ResponseEntity<GameDTO> replaceTournamentGame(@PathVariable int tournamentId,@RequestParam int gameId){return ResponseEntity.ok(tournamentService.changeTournamentGame(tournamentId,gameId));}
 
     @DeleteMapping("/{tournamentId}/game")
-    public ResponseEntity<GameDTO> removeTournamentGame(@PathVariable int tournamentId){return ResponseEntity.ok(tournamentService.deleteGameById(tournamentId));}
+    public ResponseEntity<GameDTO> removeTournamentGame(@PathVariable int tournamentId){return ResponseEntity.ok(tournamentService.deleteGame(tournamentId));}
 
 
     @GetMapping("/{tournamentId}/sponsors")

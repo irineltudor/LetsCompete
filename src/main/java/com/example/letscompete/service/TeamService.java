@@ -50,15 +50,17 @@ public class TeamService {
 
     public TeamDTO deleteTeamWithId(int teamId) {
         Team team = teamRepository.findById(teamId).orElseThrow(() -> new EntityNotFoundException("Team with id " + teamId + " not found"));
-        ;
-        TeamDTO teamDTO = new TeamDTO();
+        TeamDTO teamDTO = new TeamDTO(team);
 
 
-        if (!team.getPlayerList().isEmpty() || !team.getTournamentList().isEmpty()) {
-            throw new CannotDeleteEntityException("Cannot delete team with id " + teamId + " because the team still have some players assigned");
+        if (!teamDTO.getPlayerList().isEmpty()) {
+            throw new CannotDeleteEntityException("Cannot delete team with id " + teamId + " because the team still have some players assigned : " + teamDTO.getPlayerList());
         } else {
-            teamRepository.deleteById(teamId);
-            teamDTO = new TeamDTO(team);
+            if(!teamDTO.getTournamentList().isEmpty())
+                throw new CannotDeleteEntityException("Cannot delete team with id " + teamId + " because the team is playing in tournaments : " + teamDTO.getTournamentList());
+            else {
+                teamRepository.deleteById(teamId);
+            }
         }
 
         return teamDTO;

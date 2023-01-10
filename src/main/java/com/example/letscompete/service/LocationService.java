@@ -46,7 +46,7 @@ public class LocationService {
         LocationDTO location = getLocationDTOById(locationId);
 
         if(!location.getTournamentList().isEmpty())
-            throw new CannotDeleteEntityException("Cannot delete location with id " + location.getLocationId() + "because there are tournaments in this location");
+            throw new CannotDeleteEntityException("Cannot delete location with id " + location.getLocationId() + "because there are tournaments in this location : " + location.getTournamentList());
         else {
             if (locationRepository.existsById(locationId)) {
                 locationRepository.deleteById(locationId);

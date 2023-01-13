@@ -1,10 +1,8 @@
 package com.example.letscompete.service;
 
 import com.example.letscompete.dto.GameDTO;
-import com.example.letscompete.dto.TournamentDTO;
 import com.example.letscompete.exception.CannotDeleteEntityException;
 import com.example.letscompete.model.Game;
-import com.example.letscompete.model.Tournament;
 import com.example.letscompete.repository.GameRepository;
 import org.springframework.stereotype.Service;
 
@@ -76,5 +74,10 @@ public class GameService {
 
     public GameDTO update(Game game) {
         return new GameDTO(gameRepository.save(game));
+    }
+
+    public List<GameDTO> getGameDTOsByGenre(String genre) {
+        List<Game> gameList = gameRepository.findAllByGenre(genre).orElseThrow(() -> new EntityNotFoundException("There are no games with genre : " + genre));
+        return gameList.stream().map(GameDTO::new).collect(Collectors.toList());
     }
 }

@@ -40,6 +40,8 @@ public class GameController {
         return ResponseEntity.created(URI.create("/" + savedGame.getGameId())).body(savedGame);
     }
 
+    @GetMapping("/genre/{genre}")
+    public ResponseEntity<List<GameDTO>> retrieveGamesByGenre(@PathVariable String genre){return ResponseEntity.ok(gameService.getGameDTOsByGenre(genre));}
 
     @DeleteMapping
     public ResponseEntity<?> removeGameById(@RequestParam int gameId)

@@ -1,6 +1,6 @@
 package com.example.letscompete.service;
 
-import com.example.letscompete.dto.PlayerDTO;
+
 import com.example.letscompete.dto.SponsorDTO;
 import com.example.letscompete.exception.CannotDeleteEntityException;
 import com.example.letscompete.model.Sponsor;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service

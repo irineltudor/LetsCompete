@@ -97,6 +97,7 @@ How to use this app?
    2. POST ”localhost:8080/games” game as body parameter
    3. DELETE ”localhost:8080/games” game id as parameter
    4. GET ”localhost:8080/games/{title}” 
+   5. GET "localhost:8080/games/genre/{genre}" genre as parameter
 4. Location
    1. GET ”localhost:8080/locations”
    2. POST ”localhost:8080/locations” location as body parameter

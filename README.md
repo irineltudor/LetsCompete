@@ -76,4 +76,58 @@ Each entity has a REST endpoint:
 5. Sponsor - ”localhost:8080/sponsors”
 6. Tournament - ”localhost:8080/tournaments”
 
-The functionality of the application is done using Postman.
+How to use this app?
+1. Player
+   1. GET ”localhost:8080/players”
+   2. POST ”localhost:8080/players” + player as body parameter
+   3. DELETE ”localhost:8080/players” + player id as parameter
+   4. POST ”localhost:8080/players/bulkload” + number as parameter
+   5. GET "localhost:8080/players/{playerId}”
+   6. GET ”localhost:8080/players/{playerId}/team”
+   7. PUT ”localhost:8080/players/{playerId}/team” + team id as parameter
+   8. DELETE ”localhost:8080/players/{playerId}/team”
+2. Team
+   1. GET ”localhost:8080/teams”
+   2. POST ”localhost:8080/teams” + team as body parameter
+   3. DELETE ”localhost:8080/teams” + team id as parameter
+   4. GET ”localhost:8080/teams/{teamId}”
+   5. ”localhost:8080/teams/{teamId}/players”
+3. Game
+   1. GET ”localhost:8080/games”
+   2. POST ”localhost:8080/games” game as body parameter
+   3. DELETE ”localhost:8080/games” game id as parameter
+   4. GET ”localhost:8080/games/{title}” 
+4. Location
+   1. GET ”localhost:8080/locations”
+   2. POST ”localhost:8080/locations” location as body parameter
+   3. DELETE ”localhost:8080/locations” location id as parameter
+   4. GET ”localhost:8080/locations/{locationId}”
+   5. PUT ”localhost:8080/locations/{locationId}” address as parameter
+5. Sponsor
+   1. GET ”localhost:8080/sponsors”
+   2. POST ”localhost:8080/sponsors” sponsor as body parameter
+   3. DELETE ”localhost:8080/sponsors” sponsor id as parameter
+   4. GET ”localhost:8080/sponsors/{sponsorId}”
+6. Tournament 
+   1. GET ”localhost:8080/tournaments”
+   2. POST ”localhost:8080/tournaments” + tournament as body parameter
+   3. DELETE ”localhost:8080/tournaments” + tournament id as parameter 
+   4. GET ”localhost:8080/tournaments/{tournamentId}”
+   5. GET ”localhost:8080/tournaments/{tournamentId}/teams”
+   6. PUT ”localhost:8080/tournaments/{tournamentId}/teams” + team id as parameter
+   7. DELETE ”localhost:8080/tournaments/{tournamentId}/teams” + team id as parameter
+   8. GET ”localhost:8080/tournaments/{tournamentId}/game”
+   9. PUT ”localhost:8080/tournaments/{tournamentId}/game” + game id as parameter
+   10. DELETE ”localhost:8080/tournaments/{tournamentId}/game”
+   11. GET ”localhost:8080/tournaments/{tournamentId}/location”
+   12. PUT ”localhost:8080/tournaments/{tournamentId}/location” + location id as parameter
+   13. DELETE ”localhost:8080/tournaments/{tournamentId}/location”
+   14. GET ”localhost:8080/tournaments/{tournamentId}/sponsors”
+   15. PUT ”localhost:8080/tournaments/{tournamentId}/sponsors” + sponsor id as parameter
+   16. DELETE ”localhost:8080/tournaments/{tournamentId}/sponsors” + sponsor id as parameter
+   17. GET ”localhost:8080/tournaments/on/today”
+   18. GET ”localhost:8080/tournaments/on/{date}” + date as parameter
+
+
+
+The functionality of the application can be used with Postman.

@@ -1,5 +1,7 @@
 package com.example.letscompete.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tournament")
+@ApiModel(value ="Tournament", description = "Here we have the model for tournament entity")
 public class Tournament {
 
     @Id
@@ -21,23 +24,27 @@ public class Tournament {
     @NotNull(message = "Name cannot be null")
     @NotEmpty(message = "Name cannot be empty")
     @Column(name = "name")
+    @ApiModelProperty(notes = "Name of the Tournament", name = "name",dataType = "String", required = true, example="Dota 2 – The International 2023")
     private String name;
 
     @NotNull(message = "Type cannot be null")
     @NotEmpty(message = "type cannot be empty")
     @Pattern(regexp = "1v1|5v5", message = "Incorrect type format ( 1v1 or 5v5 )")
     @Column(name = "type")
+    @ApiModelProperty(notes = "Type of the Tournament", name = "type",dataType = "String", required = true, example="1v1 or 5v5")
     private String type;
 
     @NotNull(message = "Release date cannot be null")
     @NotEmpty(message = "Release date cannot be empty")
     @Pattern(regexp = "[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[0-1])", message = "Incorrect date format (yyyy-mm-dd ex:2000-01-20)")
     @Column(name = "date")
+    @ApiModelProperty(notes = "Date of the Tournament", name = "date",dataType = "String", required = true, example="2000-01-20(yyyy-MM-dd)")
     private String date;
 
     @NotNull(message = "Prize date cannot be null")
     @NotEmpty(message = "Prize date cannot be empty")
     @Column(name = "prize")
+    @ApiModelProperty(notes = "Prize of the Tournament", name = "prize",dataType = "String", required = true, example="1.000.000$ + 5 x Gaming Chairs")
     private String prize;
 
 

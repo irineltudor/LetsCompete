@@ -4,6 +4,7 @@ import com.example.letscompete.dto.SponsorDTO;
 import com.example.letscompete.dto.SponsorDTO;
 import com.example.letscompete.model.Sponsor;
 import com.example.letscompete.service.SponsorService;
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sponsors")
+@Api(value="Swagger2SponsorController", description = "REST APIs related to Sponsor Controller.")
 public class SponsorController {
 
     private final SponsorService sponsorService;

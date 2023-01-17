@@ -5,6 +5,7 @@ import com.example.letscompete.dto.GameDTO;
 import com.example.letscompete.dto.LocationDTO;
 import com.example.letscompete.model.Location;
 import com.example.letscompete.service.LocationService;
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/locations")
+@Api(value="Swagger2LocationController", description = "REST APIs related to Location Controller.")
 public class LocationController {
 
     private final LocationService locationService;

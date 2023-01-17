@@ -1,6 +1,8 @@
 package com.example.letscompete.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "sponsor")
+@ApiModel(value ="Sponsor", description = "Here we have the model for sponsor entity")
 public class Sponsor {
 
     @Id
@@ -19,6 +22,7 @@ public class Sponsor {
     @NotNull(message = "Name cannot be null")
     @NotEmpty(message = "Name cannot be empty")
     @Column(name = "name")
+    @ApiModelProperty(notes = "Name of the Sponsor", name = "name",dataType = "String", required = true, example="COCA COLA")
     private String name;
 
     @ManyToMany(mappedBy = "sponsorList", fetch = FetchType.EAGER)

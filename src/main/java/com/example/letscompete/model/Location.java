@@ -1,6 +1,9 @@
 package com.example.letscompete.model;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -9,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "location")
+@ApiModel(value ="Location", description = "Here we have the model for location entity")
 public class Location {
 
     @Id
@@ -19,12 +23,14 @@ public class Location {
     @NotNull(message = "Name cannot be null")
     @NotEmpty(message = "Name cannot be empty")
     @Column(name = "name")
+    @ApiModelProperty(notes = "Name of the Location", name = "name",dataType = "String", required = true, example="France")
     private String name;
 
 
     @NotNull(message = "Address cannot be null")
     @NotEmpty(message = "Address cannot be empty")
     @Column(name = "address")
+    @ApiModelProperty(notes = "Address of the Location", name = "address",dataType = "String", required = true, example="Paris")
     private String address;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.EAGER)

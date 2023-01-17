@@ -5,6 +5,7 @@ import com.example.letscompete.dto.PlayerDTO;
 import com.example.letscompete.dto.TeamDTO;
 import com.example.letscompete.model.Team;
 import com.example.letscompete.service.TeamService;
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/teams")
+@Api(value="Swagger2TeamController", description = "REST APIs related to Team Controller.")
 public class TeamController {
 
     private final TeamService teamService;

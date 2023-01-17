@@ -1,6 +1,8 @@
 package com.example.letscompete.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.UniqueElements;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "team")
+@ApiModel(value ="Team", description = "Here we have the model for team entity")
 public class Team {
 
     @Id
@@ -22,6 +25,7 @@ public class Team {
     @NotNull(message = "Name cannot be null")
     @NotEmpty(message = "Name cannot be empty")
     @Column(name = "name")
+    @ApiModelProperty(notes = "Name of the Team", name = "name",dataType = "String", required = true, example="Team Liquid")
     private String name;
 
     @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)

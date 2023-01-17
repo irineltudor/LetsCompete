@@ -4,6 +4,7 @@ package com.example.letscompete.controller;
 import com.example.letscompete.dto.PlayerDTO;
 import com.example.letscompete.model.Player;
 import com.example.letscompete.service.PlayerService;
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/players")
+@Api(value="Swagger2PlayerController", description = "REST APIs related to Player Controller.")
 public class PlayerController {
 
     private final PlayerService playerService;

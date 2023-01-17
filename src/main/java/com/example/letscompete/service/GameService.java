@@ -4,6 +4,7 @@ import com.example.letscompete.dto.GameDTO;
 import com.example.letscompete.exception.CannotDeleteEntityException;
 import com.example.letscompete.model.Game;
 import com.example.letscompete.repository.GameRepository;
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;

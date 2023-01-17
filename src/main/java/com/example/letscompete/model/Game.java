@@ -30,11 +30,11 @@ public class Game {
 
     @NotNull(message = "Release date cannot be null")
     @NotEmpty(message = "Release date cannot be empty")
-    @Pattern(regexp = "[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[0-1])", message = "Incorrect date format")
+    @Pattern(regexp = "[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[0-1])", message = "Incorrect date format (yyyy-MM-dd ex:2000-09-11)")
     @Column(name = "release_date")
     private String releaseDate;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     private List<Tournament> tournamentList = new ArrayList<>();
 
     public Game() {

@@ -21,7 +21,7 @@ public class Sponsor {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "sponsorList")
+    @ManyToMany(mappedBy = "sponsorList", fetch = FetchType.EAGER)
     private List<Tournament> tournamentList = new ArrayList<>();
 
     public Sponsor() {

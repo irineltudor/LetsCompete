@@ -90,7 +90,7 @@ public class PlayerService {
     @Transactional
     // this will roll back everything after exception because we don't need addition if the exception is thrown
     public String bulkLoadPlayer(int n) {
-        for (int i = 10; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             if (playerRepository.existsByFirstName("firstname" + i)) {
                 throw new RuntimeException("Player with firstname : firstname" + i + " already exist");
             }

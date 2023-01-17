@@ -27,7 +27,7 @@ public class Location {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location", fetch = FetchType.EAGER)
     private List<Tournament> tournamentList = new ArrayList<>();
 
     public Location() {

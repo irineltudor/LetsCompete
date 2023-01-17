@@ -144,7 +144,7 @@ public class PlayerServiceTests {
         catch (CannotDeleteEntityException e)
         {
             //assert
-         assertEquals("Cannot delete player with id " + player.getPlayerId() + " because player is part of a team",e.getMessage());
+         assertEquals("Cannot delete player with id " + player.getPlayerId() + " because player is part of a team, first delete player's team",e.getMessage());
          verify(playerRepository, times(0)).deleteById(playerId);
         }
 
@@ -247,9 +247,9 @@ public class PlayerServiceTests {
     void bulkLoadPlayerNegativeFlow(){
 
         //arrange
-        Player player = new Player("firstname1", "lastname1", "2000-09-11");
+        Player player = new Player("firstname0", "lastname0", "2000-09-11");
         when(playerRepository.existsByFirstName(any())).thenReturn(true);
-        String exception = "Player with firstname : firstname" + 10 + " already exist";
+        String exception = "Player with firstname : firstname" + 0 + " already exist";
         int n = 15;
 
         RuntimeException result = assertThrows(RuntimeException.class, ()-> playerService.bulkLoadPlayer(n));

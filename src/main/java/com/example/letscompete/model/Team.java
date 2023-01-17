@@ -1,6 +1,8 @@
 package com.example.letscompete.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
@@ -22,10 +24,12 @@ public class Team {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<Player> playerList = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "teamList")
+    @ManyToMany(mappedBy = "teamList", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<Tournament> tournamentList = new ArrayList<>();
 
 

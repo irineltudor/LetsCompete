@@ -262,6 +262,4 @@ public class PlayerServiceTests {
 
     }
 
-
-    //RuntimeException = assertThrow(RuntimeException.class, () -> playerService.bulkLoadPlayer(n)"
 }

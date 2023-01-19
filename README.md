@@ -76,9 +76,9 @@ Each entity has a REST endpoint:
 5. Sponsor - ”localhost:8080/sponsors”
 6. Tournament - ”localhost:8080/tournaments”
 
-The functionality of the application can be used with Postman.
+The functionality of the application can be used with Postman or accessing "http://localhost:8080/swagger-ui.html#/"..  
 
-How to use this app?
+How to use this app in Postman?
 1. Player
    1. GET ”localhost:8080/players”
    2. POST ”localhost:8080/players” + player as body parameter
@@ -131,5 +131,4 @@ How to use this app?
    17. GET ”localhost:8080/tournaments/on/today”
    18. GET ”localhost:8080/tournaments/on/{date}” + date as parameter
 
-Or it can be used by accessing "http://localhost:8080/swagger-ui.html#/".
 

@@ -15,6 +15,7 @@ public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(readOnly = true)
     private int playerId;
 
 
@@ -39,6 +40,7 @@ public class Player {
 
     @ManyToOne
     @JoinColumn(name = "team_id")
+    @ApiModelProperty(notes = "Team of the player", name = "team")
     private Team team;
 
     public Player() {

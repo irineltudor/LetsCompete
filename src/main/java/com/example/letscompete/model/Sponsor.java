@@ -17,6 +17,7 @@ public class Sponsor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(readOnly = true)
     private int sponsorId;
 
     @NotNull(message = "Name cannot be null")
@@ -26,6 +27,7 @@ public class Sponsor {
     private String name;
 
     @ManyToMany(mappedBy = "sponsorList", fetch = FetchType.EAGER)
+    @ApiModelProperty(notes = "List of tournaments where the sponsors are funding", name = "tournament list",readOnly = true)
     private List<Tournament> tournamentList = new ArrayList<>();
 
     public Sponsor() {

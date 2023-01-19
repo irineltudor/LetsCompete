@@ -2,6 +2,7 @@ package com.example.letscompete.controller;
 
 
 import com.example.letscompete.dto.PlayerDTO;
+import com.example.letscompete.dto.TeamDTO;
 import com.example.letscompete.model.Player;
 import com.example.letscompete.service.PlayerService;
 import io.swagger.annotations.Api;
@@ -34,7 +35,7 @@ public class PlayerController {
 
 
     @PostMapping
-    public ResponseEntity<?> addNewPlayer(@RequestBody @Valid Player player){
+    public ResponseEntity<PlayerDTO> addNewPlayer(@RequestBody @Valid Player player){
 
         PlayerDTO savedPlayer = playerService.add(player);
 
@@ -44,13 +45,13 @@ public class PlayerController {
     }
 
     @GetMapping("/{playerId}/team")
-    public ResponseEntity<?> getPlayerTeam(@PathVariable int playerId){return ResponseEntity.ok(playerService.getPlayerTeam(playerId));}
+    public ResponseEntity<TeamDTO> getPlayerTeam(@PathVariable int playerId){return ResponseEntity.ok(playerService.getPlayerTeam(playerId));}
 
     @PutMapping("/{playerId}/team")
-    public ResponseEntity<?> replacePlayerTeam(@PathVariable int playerId,@RequestParam int teamId){return ResponseEntity.ok(playerService.changePlayerTeam(playerId,teamId));}
+    public ResponseEntity<PlayerDTO> replacePlayerTeam(@PathVariable int playerId,@RequestParam int teamId){return ResponseEntity.ok(playerService.changePlayerTeam(playerId,teamId));}
 
     @DeleteMapping("/{playerId}/team")
-    public ResponseEntity<?> removeTeamFromPlayer(@PathVariable int playerId){return ResponseEntity.ok(playerService.deletePlayerTeam(playerId));}
+    public ResponseEntity<PlayerDTO> removeTeamFromPlayer(@PathVariable int playerId){return ResponseEntity.ok(playerService.deletePlayerTeam(playerId));}
 
 
     @DeleteMapping

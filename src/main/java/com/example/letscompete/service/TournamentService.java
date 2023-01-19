@@ -66,30 +66,36 @@ public class TournamentService {
         return new TournamentDTO(tournamentRepository.save(tournament));
     }
 
-    public TeamDTO addTeam(int tournamentId, int teamId) {
+    public TournamentDTO addTeam(int tournamentId, int teamId) {
         Tournament tournament = getTournamentById(tournamentId);
         Team team = teamService.getTeamById(teamId);
-        TeamDTO teamDTO = new TeamDTO();
+        TournamentDTO tournamentDTO = new TournamentDTO();
 
-        if (tournament.getName() != null || team.getName() != null) {
-            List<Team> teamList = tournament.getTeamList();
-            teamDTO = new TeamDTO(team);
-            teamList.add(team);
-            tournament.setTeamList(teamList);
-            tournamentRepository.save(tournament);
+        if(tournament.getTeamList().stream().anyMatch(o -> o.getTeamId() == teamId))
+        {
+            throw new RuntimeException("Team with id " + teamId + " is already assigned to this tournament");
+        }
+        else {
+            if (tournament.getName() != null || team.getName() != null) {
+                List<Team> teamList = tournament.getTeamList();
+                teamList.add(team);
+                tournament.setTeamList(teamList);
+                tournamentRepository.save(tournament);
+                tournamentDTO = new TournamentDTO(tournament);
+            }
         }
 
-        return teamDTO;
+        return tournamentDTO;
 
     }
 
-    public TeamDTO deleteTeamById(int tournamentId, int teamId) {
+    public TournamentDTO deleteTeamById(int tournamentId, int teamId) {
         Tournament tournament = getTournamentById(tournamentId);
         Team team = teamService.getTeamById(teamId);
-        TeamDTO teamDTO = new TeamDTO();
+        TournamentDTO tournamentDTO;
 
 
-        if (!tournament.getTeamList().contains(team)) {
+        if (tournament.getTeamList().stream().noneMatch(o -> o.getTeamId() == teamId)) {
             throw new CannotDeleteEntityException("Team with id " + teamId + " is not signed for this tournament");
         } else {
 
@@ -97,19 +103,21 @@ public class TournamentService {
             List<Team> teamList = tournament.getTeamList().stream().filter(team1 -> team1.getTeamId() != team.getTeamId()).collect(Collectors.toList());
 
             team.setTournamentList(tournamentList);
-            teamDTO = teamService.update(team);
+            teamService.update(team);
 
             tournament.setTeamList(teamList);
             tournamentRepository.save(tournament);
 
+            tournamentDTO = new TournamentDTO(tournament);
+
         }
 
 
-        return teamDTO;
+        return tournamentDTO;
     }
 
-    public LocationDTO deleteLocation(int tournamentId) {
-        LocationDTO locationDTO = new LocationDTO();
+    public TournamentDTO deleteLocation(int tournamentId) {
+        TournamentDTO tournamentDTO;
         Tournament tournament = getTournamentById(tournamentId);
 
 
@@ -124,15 +132,15 @@ public class TournamentService {
 
             tournamentRepository.save(tournament);
 
-            locationDTO = new LocationDTO(location);
+            tournamentDTO = new TournamentDTO(tournament);
         }
 
 
-        return locationDTO;
+        return tournamentDTO;
     }
 
-    public GameDTO deleteGame(int tournamentId) {
-        GameDTO gameDTO;
+    public TournamentDTO deleteGame(int tournamentId) {
+        TournamentDTO tournamentDTO;
         Tournament tournament = getTournamentById(tournamentId);
 
         if (tournament.getGame() == null) {
@@ -142,21 +150,20 @@ public class TournamentService {
             tournament.setGame(null);
             game.setTournamentList(game.getTournamentList().stream().filter(tournament1 -> tournament1.getTournamentId() != tournamentId).collect(Collectors.toList()));
             tournamentRepository.save(tournament);
-            gameDTO = new GameDTO(game);
+            tournamentDTO = new TournamentDTO(tournament);
         }
 
 
-        return gameDTO;
+        return tournamentDTO;
 
     }
 
-    public SponsorDTO deleteSponsorById(int tournamentId, int sponsorId) {
-        SponsorDTO sponsorDTO = new SponsorDTO();
+    public TournamentDTO deleteSponsorById(int tournamentId, int sponsorId) {
+        TournamentDTO tournamentDTO;
         Tournament tournament = getTournamentById(tournamentId);
         Sponsor sponsor = sponsorService.getSponsorById(sponsorId);
 
-
-        if (!tournament.getSponsorList().contains(sponsor)) {
+        if (tournament.getSponsorList().stream().noneMatch(o -> o.getSponsorId() == sponsorId)) {
             throw new CannotDeleteEntityException("Sponsor with id " + sponsorId + " is not signed for this tournament");
         } else {
             List<Sponsor> sponsorList = tournament.getSponsorList().stream().filter(sponsor1 -> sponsor1.getSponsorId() != sponsorId).collect(Collectors.toList());
@@ -164,10 +171,10 @@ public class TournamentService {
 
             tournament.setSponsorList(sponsorList);
             tournamentRepository.save(tournament);
-            sponsorDTO = new SponsorDTO(sponsor);
+            tournamentDTO = new TournamentDTO(tournament);
         }
 
-        return sponsorDTO;
+        return tournamentDTO;
     }
 
 
@@ -198,8 +205,8 @@ public class TournamentService {
         return locationDTO;
     }
 
-    public LocationDTO changeTournamentLocation(int tournamentId, int locationId) {
-        LocationDTO locationDTO = new LocationDTO();
+    public TournamentDTO changeTournamentLocation(int tournamentId, int locationId) {
+        TournamentDTO tournamentDTO;
         Tournament tournament = getTournamentById(tournamentId);
         Location newLocation = locationService.getLocationById(locationId);
         Location oldLocation = tournament.getLocation();
@@ -215,10 +222,12 @@ public class TournamentService {
         List<Tournament> tournamentList = newLocation.getTournamentList();
         tournamentList.add(tournament);
         newLocation.setTournamentList(tournamentList);
-        locationDTO = locationService.update(newLocation);
+        locationService.update(newLocation);
+
+        tournamentDTO = new TournamentDTO(tournament);
 
 
-        return locationDTO;
+        return tournamentDTO;
     }
 
     public GameDTO getTournamentGame(int tournamentId) {
@@ -230,8 +239,8 @@ public class TournamentService {
         return gameDTO;
     }
 
-    public GameDTO changeTournamentGame(int tournamentId, int gameId) {
-        GameDTO gameDTO = new GameDTO();
+    public TournamentDTO changeTournamentGame(int tournamentId, int gameId) {
+        TournamentDTO tournamentDTO;
         Tournament tournament = getTournamentById(tournamentId);
         Game newGame = gameService.getGameById(gameId);
         Game oldGame = tournament.getGame();
@@ -239,11 +248,12 @@ public class TournamentService {
 
         tournament.setGame(newGame);
         tournamentRepository.save(tournament);
+        tournamentDTO = new TournamentDTO(tournament);
 
         List<Tournament> tournamentList = newGame.getTournamentList();
         tournamentList.add(tournament);
         newGame.setTournamentList(tournamentList);
-        gameDTO = gameService.update(newGame);
+        gameService.update(newGame);
 
         if(oldGame != null) {
             oldGame.setTournamentList(newGame.getTournamentList().stream().filter(tournament1 -> tournament1.getTournamentId() != tournamentId).collect(Collectors.toList()));
@@ -251,7 +261,7 @@ public class TournamentService {
         }
 
 
-        return gameDTO;
+        return tournamentDTO;
     }
 
     public List<SponsorDTO> getTournamentSponsors(int tournamentId) {
@@ -264,11 +274,15 @@ public class TournamentService {
         return sponsorDTOList;
     }
 
-    public SponsorDTO addTournamentSponsor(int tournamentId, int sponsorId) {
-        SponsorDTO sponsorDTO = new SponsorDTO();
+    public TournamentDTO addTournamentSponsor(int tournamentId, int sponsorId) {
+        TournamentDTO tournamentDTO;
         Tournament tournament = getTournamentById(tournamentId);
         Sponsor sponsor = sponsorService.getSponsorById(sponsorId);
 
+
+        if (tournament.getSponsorList().stream().anyMatch(o -> o.getSponsorId() == sponsorId)){
+            throw new CannotDeleteEntityException("Sponsor with id " + sponsorId + " is already funding this tournament");
+        }
 
         List<Sponsor> sponsorList = tournament.getSponsorList();
         List<Tournament> tournamentList = sponsor.getTournamentList();
@@ -279,10 +293,12 @@ public class TournamentService {
 
         tournamentList.add(tournament);
         sponsor.setTournamentList(tournamentList);
-        sponsorDTO = sponsorService.update(sponsor);
+        sponsorService.update(sponsor);
+
+        tournamentDTO = new TournamentDTO(tournament);
 
 
-        return sponsorDTO;
+        return tournamentDTO;
     }
 
     public List<TournamentDTO> getTournamentsForToday() {
@@ -302,7 +318,6 @@ public class TournamentService {
 
     public List<TournamentDTO> getTournamentsForDate(String date) {
 
-        System.out.println(date);
         List<TournamentDTO> tournamentDTOList = new ArrayList<>();
         if (!date.matches("[0-9]{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[0-1])")) {
             throw new DateNotValidException("Incorrect date format (yyyy-mm-dd ex:2000-01-20)");

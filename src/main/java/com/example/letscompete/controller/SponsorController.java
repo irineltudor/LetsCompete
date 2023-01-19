@@ -31,7 +31,7 @@ public class SponsorController {
     public ResponseEntity<SponsorDTO> retrieveSponsorById(@PathVariable int sponsorId){return ResponseEntity.ok(sponsorService.getSponsorDTOById(sponsorId));}
 
     @PostMapping
-    public ResponseEntity<?> addNewSponsor(@RequestBody @Valid Sponsor sponsor){
+    public ResponseEntity<SponsorDTO> addNewSponsor(@RequestBody @Valid Sponsor sponsor){
         SponsorDTO savedSponsor = sponsorService.add(sponsor);
 
         System.out.printf("Sponsor with id " + savedSponsor.getSponsorId() + "created \n");
@@ -40,7 +40,7 @@ public class SponsorController {
     }
 
     @DeleteMapping
-    public ResponseEntity<?> removeSponsorById(@RequestParam int sponsorId)
+    public ResponseEntity<SponsorDTO> removeSponsorById(@RequestParam int sponsorId)
     {
         SponsorDTO deletedSponsor = sponsorService.deleteSponsorWithId(sponsorId);
 

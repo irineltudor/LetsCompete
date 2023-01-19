@@ -36,7 +36,7 @@ public class TeamController {
     public ResponseEntity<List<PlayerDTO>> retrieveTeamPLayer(@PathVariable int teamId){return ResponseEntity.ok(teamService.getTeamPlayers(teamId));}
 
     @PostMapping
-    public ResponseEntity<?> addNewTeam(@RequestBody @Valid Team team){
+    public ResponseEntity<TeamDTO> addNewTeam(@RequestBody @Valid Team team){
         TeamDTO savedTeam = teamService.add(team);
 
         System.out.printf("Team with id " + savedTeam.getTeamId() + "created \n");
@@ -45,7 +45,7 @@ public class TeamController {
     }
 
     @DeleteMapping
-    public ResponseEntity<?> removeTeamById(@RequestParam int teamId){return ResponseEntity.ok(teamService.deleteTeamWithId(teamId));}
+    public ResponseEntity<TeamDTO> removeTeamById(@RequestParam int teamId){return ResponseEntity.ok(teamService.deleteTeamWithId(teamId));}
 
 
 }

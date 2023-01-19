@@ -2,6 +2,7 @@ package com.example.letscompete.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -19,6 +20,7 @@ public class Tournament {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(readOnly = true)
     private int tournamentId;
 
     @NotNull(message = "Name cannot be null")
@@ -31,7 +33,7 @@ public class Tournament {
     @NotEmpty(message = "type cannot be empty")
     @Pattern(regexp = "1v1|5v5", message = "Incorrect type format ( 1v1 or 5v5 )")
     @Column(name = "type")
-    @ApiModelProperty(notes = "Type of the Tournament", name = "type",dataType = "String", required = true, example="1v1 or 5v5")
+    @ApiModelProperty(notes = "Type of the Tournament", name = "type",dataType = "String", required = true, example="1v1", allowableValues = "1v1 or 5v5")
     private String type;
 
     @NotNull(message = "Release date cannot be null")
@@ -50,22 +52,26 @@ public class Tournament {
 
     @ManyToOne
     @JoinColumn(name = "game_id")
+    @ApiModelProperty(notes = "Game of the Tournament", name = "game")
     private Game game;
 
     @ManyToOne
     @JoinColumn(name = "location_id")
+    @ApiModelProperty(notes = "Location of the Tournament", name = "location")
     private Location location;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(name = "tournament_sponsor", joinColumns = @JoinColumn(name = "tournament_id"), inverseJoinColumns = @JoinColumn(name = "sponsor_id"))
+    @ApiModelProperty(notes = "List of sponsors of the tournament", name = "sponsor list")
     private List<Sponsor> sponsorList = new ArrayList<>();
 
 
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(name = "tournament_team", joinColumns = @JoinColumn(name = "tournament_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
+    @ApiModelProperty(notes = "List of teams of the tournament", name = "team list")
     private List<Team> teamList = new ArrayList<>();
 
 

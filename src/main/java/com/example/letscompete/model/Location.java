@@ -17,6 +17,7 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(readOnly = true)
     private int locationId;
 
 
@@ -34,6 +35,7 @@ public class Location {
     private String address;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.EAGER)
+    @ApiModelProperty(notes = "List of tournaments where the location is used", name = "tournament list",readOnly = true)
     private List<Tournament> tournamentList = new ArrayList<>();
 
     public Location() {

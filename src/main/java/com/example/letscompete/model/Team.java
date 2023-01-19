@@ -20,6 +20,7 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(readOnly = true)
     private int teamId;
 
     @NotNull(message = "Name cannot be null")
@@ -30,10 +31,12 @@ public class Team {
 
     @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
+    @ApiModelProperty(notes = "List of players in the team", name = "player list",readOnly = true)
     private List<Player> playerList = new ArrayList<>();
 
     @ManyToMany(mappedBy = "teamList", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
+    @ApiModelProperty(notes = "List of tournaments where the team is playing", name = "tournament list",readOnly = true)
     private List<Tournament> tournamentList = new ArrayList<>();
 
 

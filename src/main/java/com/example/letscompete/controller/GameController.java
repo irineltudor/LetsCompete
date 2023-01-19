@@ -34,7 +34,7 @@ public class GameController {
 
 
     @PostMapping
-    public ResponseEntity<?> addNewGame(@RequestBody @Valid Game game){
+    public ResponseEntity<GameDTO> addNewGame(@RequestBody @Valid Game game){
         GameDTO savedGame = gameService.add(game);
 
         System.out.printf("Game with id " + savedGame.getGameId() + "created \n");

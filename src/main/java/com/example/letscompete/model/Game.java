@@ -19,6 +19,7 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(readOnly = true)
     private int gameId;
 
     @NotNull(message = "Title cannot be null")
@@ -42,6 +43,7 @@ public class Game {
     private String releaseDate;
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    @ApiModelProperty(notes = "List of tournaments where the game is played", name = "tournament list",readOnly = true)
     private List<Tournament> tournamentList = new ArrayList<>();
 
     public Game() {

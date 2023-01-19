@@ -32,7 +32,7 @@ public class LocationController {
     public ResponseEntity<LocationDTO> retrieveLocationById(@PathVariable int locationId){return ResponseEntity.ok(locationService.getLocationDTOById(locationId));}
 
     @PostMapping
-    public ResponseEntity<?> addNewLocation(@RequestBody @Valid Location location){
+    public ResponseEntity<LocationDTO> addNewLocation(@RequestBody @Valid Location location){
         LocationDTO savedLocation = locationService.add(location);
 
         System.out.printf("Location with id " + savedLocation.getLocationId() + "created \n");

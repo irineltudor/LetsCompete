@@ -28,8 +28,6 @@ public class SponsorService {
 
     public SponsorDTO getSponsorDTOById(int sponsorId){return new SponsorDTO(sponsorRepository.findById(sponsorId).orElseThrow(()->new EntityNotFoundException("Sponsor with id " + sponsorId + " not found")));}
 
-    protected List<Sponsor> getSponsorsById(List<Integer> sponsorIds){return sponsorRepository.findAllById(sponsorIds);}
-
     public SponsorDTO add(Sponsor sponsor) {
         return new SponsorDTO(sponsorRepository.save(sponsor));
     }

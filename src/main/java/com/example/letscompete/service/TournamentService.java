@@ -195,12 +195,9 @@ public class TournamentService {
     }
 
     public LocationDTO getTournamentLocation(int tournamentId) {
-        LocationDTO locationDTO = new LocationDTO();
+        LocationDTO locationDTO;
         Tournament tournament = getTournamentById(tournamentId);
-
-
         locationDTO = new LocationDTO(tournament.getLocation());
-
 
         return locationDTO;
     }
@@ -215,7 +212,6 @@ public class TournamentService {
             oldLocation.setTournamentList(oldLocation.getTournamentList().stream().filter(tournament1 -> tournament1.getTournamentId() != tournamentId).collect(Collectors.toList()));
             locationService.update(oldLocation);
         }
-
         tournament.setLocation(newLocation);
         tournamentRepository.save(tournament);
 
@@ -226,14 +222,15 @@ public class TournamentService {
 
         tournamentDTO = new TournamentDTO(tournament);
 
-
         return tournamentDTO;
     }
 
     public GameDTO getTournamentGame(int tournamentId) {
-        GameDTO gameDTO = new GameDTO();
+        GameDTO gameDTO;
         Tournament tournament = getTournamentById(tournamentId);
 
+        if(tournament.getGame() == null)
+            throw new EntityNotFoundException("Tournament with id " + tournamentId + " has no game assinged");
         gameDTO = new GameDTO(tournament.getGame());
 
         return gameDTO;
@@ -265,11 +262,10 @@ public class TournamentService {
     }
 
     public List<SponsorDTO> getTournamentSponsors(int tournamentId) {
-        List<SponsorDTO> sponsorDTOList = new ArrayList<>();
+        List<SponsorDTO> sponsorDTOList;
         Tournament tournament = getTournamentById(tournamentId);
 
         sponsorDTOList = tournament.getSponsorList().stream().map(SponsorDTO::new).collect(Collectors.toList());
-
 
         return sponsorDTOList;
     }
@@ -305,7 +301,7 @@ public class TournamentService {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         List<Tournament> tournamentList = tournamentRepository.findAllByDate(dtf.format(LocalDateTime.now()));
-        List<TournamentDTO> tournamentDTOList = new ArrayList<>();
+        List<TournamentDTO> tournamentDTOList;
 
         if (tournamentList.isEmpty()) {
             throw new EntityNotFoundException("There are no tournaments for today");

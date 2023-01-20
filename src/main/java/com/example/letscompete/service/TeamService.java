@@ -39,10 +39,6 @@ public class TeamService {
         return new TeamDTO(teamRepository.save(team));
     }
 
-    public TeamDTO getTeamByName(String teamName) {
-        return new TeamDTO(teamRepository.findTeamByName(teamName));
-    }
-
     public TeamDTO update(Team team) {
         return new TeamDTO(teamRepository.save(team));
     }
@@ -67,13 +63,11 @@ public class TeamService {
     }
 
     public List<PlayerDTO> getTeamPlayers(int teamId)
-    {
-        Team team = getTeamById(teamId);
+    {   Team team = getTeamById(teamId);
         List<PlayerDTO> playerDTOList;
 
         if(team.getPlayerList().isEmpty())
-        {
-         throw new EntityNotFoundException("Team with id " + teamId + " has no players assigned");
+        {throw new EntityNotFoundException("Team with id " + teamId + " has no players assigned");
         }
         else {
             playerDTOList = team.getPlayerList().stream().map(PlayerDTO::new).collect(Collectors.toList());

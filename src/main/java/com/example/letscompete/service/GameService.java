@@ -59,20 +59,6 @@ public class GameService {
         return deletedGame;
     }
 
-    public GameDTO deleteGameWithTitle(String title) {
-
-        Game deletedGame = getGameByTitle(title);
-
-        if (!deletedGame.getTournamentList().isEmpty())
-            throw new CannotDeleteEntityException("Cannot delete " + deletedGame.getTitle() + " because there are tournaments where this game is played");
-        else {
-
-            gameRepository.deleteById(deletedGame.getGameId());
-
-        }
-        return new GameDTO(deletedGame);
-    }
-
     public GameDTO update(Game game) {
         return new GameDTO(gameRepository.save(game));
     }

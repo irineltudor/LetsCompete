@@ -122,7 +122,7 @@ public class TournamentService {
 
 
         if (tournament.getLocation() == null) {
-            throw new CannotDeleteEntityException("Tournament with id " + tournament + " has no location assigned");
+            throw new CannotDeleteEntityException("Tournament with id " + tournamentId + " has no location assigned");
         } else {
             Location location = tournament.getLocation();
 
@@ -144,7 +144,8 @@ public class TournamentService {
         Tournament tournament = getTournamentById(tournamentId);
 
         if (tournament.getGame() == null) {
-            throw new CannotDeleteEntityException("Tournament with id " + tournament + " has no game assigned");
+            tournamentDTO = new TournamentDTO(tournament);
+            throw new CannotDeleteEntityException("Tournament with id " + tournamentId + " has no game assigned");
         } else {
             Game game = tournament.getGame();
             tournament.setGame(null);

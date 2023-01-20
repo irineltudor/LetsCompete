@@ -62,9 +62,10 @@ tournament, tournament).
 
 1. The app will retrieve details about every element that takes part in the tournament(Player,
 Team, Game, Location, Sponsor, Tournament).
-2. The app will offer support for adding, changing and deleting elements.
-3. The app will show tournaments that are happening ”today” or in any other day that the
-user specifies.
+2. The app will offer functionality and support for adding entities.
+3. The app will offer functionality and support for changing entities.
+4. The app will offer functionality and support for deleting entities.
+5. The app will display tournaments that are taking place today or on a specific day selected by the user.
 
 # Other details #
 
@@ -76,7 +77,7 @@ Each entity has a REST endpoint:
 5. Sponsor - ”localhost:8080/sponsors”
 6. Tournament - ”localhost:8080/tournaments”
 
-The functionality of the application can be used with Postman or accessing "http://localhost:8080/swagger-ui.html#/"..  
+The functionality of the application can be used with Postman or by accessing "http://localhost:8080/swagger-ui.html#/". 
 
 How to use this app in Postman?
 1. Player

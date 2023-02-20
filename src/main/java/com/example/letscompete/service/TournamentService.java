@@ -198,6 +198,10 @@ public class TournamentService {
     public LocationDTO getTournamentLocation(int tournamentId) {
         LocationDTO locationDTO;
         Tournament tournament = getTournamentById(tournamentId);
+
+        if(tournament.getLocation() == null) {
+         throw new EntityNotFoundException("Tournament with id " + tournamentId + " has no location assigned");
+        }
         locationDTO = new LocationDTO(tournament.getLocation());
 
         return locationDTO;
@@ -231,7 +235,7 @@ public class TournamentService {
         Tournament tournament = getTournamentById(tournamentId);
 
         if(tournament.getGame() == null)
-            throw new EntityNotFoundException("Tournament with id " + tournamentId + " has no game assinged");
+            throw new EntityNotFoundException("Tournament with id " + tournamentId + " has no game assigned");
         gameDTO = new GameDTO(tournament.getGame());
 
         return gameDTO;

@@ -156,7 +156,7 @@ public class TournamentServiceTests {
             TournamentDTO result = tournamentService.deleteLocation(tournamentId);
         }catch (CannotDeleteEntityException e) {
             //assert - see what is happening
-            assertEquals("Tournament with id " + tournament + " has no location assigned",e.getMessage());
+            assertEquals("Tournament with id " + tournamentId + " has no location assigned",e.getMessage());
         }
     }
 
@@ -192,7 +192,7 @@ public class TournamentServiceTests {
             TournamentDTO result = tournamentService.deleteGame(tournamentId);
         }catch (CannotDeleteEntityException e) {
             //assert - see what is happening
-            assertEquals("Tournament with id " + tournament + " has no game assigned",e.getMessage());
+            assertEquals("Tournament with id " + tournamentId + " has no game assigned",e.getMessage());
         }
     }
 

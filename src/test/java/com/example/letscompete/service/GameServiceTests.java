@@ -2,8 +2,10 @@ package com.example.letscompete.service;
 
 
 import com.example.letscompete.dto.GameDTO;
+import com.example.letscompete.dto.PlayerDTO;
 import com.example.letscompete.exception.CannotDeleteEntityException;
 import com.example.letscompete.model.Game;
+import com.example.letscompete.model.Player;
 import com.example.letscompete.model.Tournament;
 import com.example.letscompete.repository.GameRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +27,7 @@ import static org.mockito.Mockito.when;
 public class GameServiceTests {
 
     @InjectMocks
-    private GameServiceImpl gameService;
+    private GameService gameService;
 
     @Mock
     private GameRepository gameRepository;

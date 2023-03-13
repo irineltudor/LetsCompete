@@ -2,6 +2,7 @@ package com.example.letscompete.service;
 
 import com.example.letscompete.dto.GameDTO;
 import com.example.letscompete.dto.SponsorDTO;
+import com.example.letscompete.dto.TeamDTO;
 import com.example.letscompete.dto.TournamentDTO;
 import com.example.letscompete.exception.CannotDeleteEntityException;
 import com.example.letscompete.model.*;
@@ -13,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -37,7 +39,7 @@ public class TournamentServiceTests {
     private LocationService locationService;
 
     @Mock
-    private GameServiceImpl gameService;
+    private GameService gameService;
 
     @Test
     @DisplayName("Running add team in happy flow")
